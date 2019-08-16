@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace Phlib\SchemaChange\Table;
 
 use Phlib\SchemaChange\Column;
+use Phlib\SchemaChange\OnlineChange;
+use Phlib\SchemaChange\OnlineChangeException;
 
-class Alter extends Create
+class Alter extends Create implements OnlineChange
 {
     /**
      * @var string
@@ -36,6 +38,16 @@ class Alter extends Create
      * @var bool
      */
     private $force = false;
+
+    /**
+     * @var bool
+     */
+    private $onlineChange = false;
+
+    public function getName(): string
+    {
+        return $this->table;
+    }
 
     public function rename(string $newName): self
     {
@@ -90,6 +102,17 @@ class Alter extends Create
         return $this;
     }
 
+    public function onlineChange(): self
+    {
+        $this->onlineChange = true;
+        return $this;
+    }
+
+    public function getOnlineChange(): bool
+    {
+        return $this->onlineChange;
+    }
+
     public function toSql(): string
     {
         $tableName = $this->tableIdentifier($this->table);
@@ -98,6 +121,14 @@ class Alter extends Create
         $ddl .= $this->getCmds();
 
         return $ddl;
+    }
+
+    public function toOnlineAlter(): string
+    {
+        if (isset($this->newName)) {
+            throw new OnlineChangeException('RENAME table is not supported for online change');
+        }
+        return $this->getCmds();
     }
 
     private function getCmds(): string

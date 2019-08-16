@@ -20,10 +20,16 @@ class SchemaChange
      */
     private $formatter;
 
-    public function __construct(Adapter $db)
+    /**
+     * @var OnlineChangeRunner
+     */
+    private $onlineChangeRunner;
+
+    public function __construct(Adapter $db, OnlineChangeRunner $onlineChangeRunner = null)
     {
         $this->db = $db;
         $this->formatter = new Formatter($this->db);
+        $this->onlineChangeRunner = $onlineChangeRunner;
     }
 
     public function mapNames(NameMapper $nameMapper): void
@@ -48,6 +54,12 @@ class SchemaChange
 
     public function execute(Change $change): void
     {
-        $this->db->execute($change->toSql());
+        if (isset($this->onlineChangeRunner) &&
+            $change instanceof OnlineChange && $change->getOnlineChange()
+        ) {
+            $this->onlineChangeRunner->execute($this->db->getConfig(), $change);
+        } else {
+            $this->db->execute($change->toSql());
+        }
     }
 }
