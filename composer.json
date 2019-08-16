@@ -1,0 +1,20 @@
+{
+    "name": "phlib/schema-change",
+    "description": "Library for performing MySQL DDL operations, using either simple SQL or Percona Tools Online Schema Change",
+    "type": "library",
+    "license": "LGPL-3.0",
+    "authors": [
+        {
+            "name": "Martin Price",
+            "email": "martin.price@xtremepush.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phlib\\SchemaChange\\": "src/"
+        }
+    }
+}
