@@ -26,6 +26,11 @@ class SchemaChange
         $this->formatter = new Formatter($this->db);
     }
 
+    public function mapNames(NameMapper $nameMapper): void
+    {
+        $this->formatter->setNameMapper($nameMapper);
+    }
+
     public function create(string $table): Create
     {
         return new Create($this->formatter, $table);

@@ -12,14 +12,27 @@ class Formatter
      */
     private $db;
 
+    /**
+     * @var NameMapper
+     */
+    private $nameMapper;
+
     public function __construct(Adapter $db)
     {
         $this->db = $db;
     }
 
+    public function setNameMapper(NameMapper $nameMapper): void
+    {
+        $this->nameMapper = $nameMapper;
+    }
+
     public function tableIdentifier(string $tableIdentifier): string
     {
-        return $this->quoteIdentifier($tableIdentifier); // @todo prefixing
+        if (isset($this->nameMapper)) {
+            $tableIdentifier = $this->nameMapper->mapTableName($tableIdentifier);
+        }
+        return $this->quoteIdentifier($tableIdentifier);
     }
 
     public function quoteIdentifier(string $identifier): string
