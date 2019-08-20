@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Phlib\SchemaChange;
 
 use Phlib\Db\Adapter;
+use Phlib\Db\Exception\Exception as DbException;
+use Phlib\SchemaChange\Exception\RuntimeException;
 use Phlib\SchemaChange\Table\Alter;
 use Phlib\SchemaChange\Table\Create;
 use Phlib\SchemaChange\Table\Drop;
@@ -59,7 +61,11 @@ class SchemaChange
         ) {
             $this->onlineChangeRunner->execute($this->db->getConfig(), $change);
         } else {
-            $this->db->execute($change->toSql());
+            try {
+                $this->db->execute($change->toSql());
+            } catch (DbException $e) {
+                throw RuntimeException::fromDbException($e);
+            }
         }
     }
 }

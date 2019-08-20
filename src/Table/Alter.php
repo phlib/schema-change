@@ -5,7 +5,7 @@ namespace Phlib\SchemaChange\Table;
 
 use Phlib\SchemaChange\Column;
 use Phlib\SchemaChange\OnlineChange;
-use Phlib\SchemaChange\OnlineChangeException;
+use Phlib\SchemaChange\Exception\OnlineChangeException;
 
 class Alter extends Create implements OnlineChange
 {

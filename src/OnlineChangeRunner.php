@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
 
+use Phlib\SchemaChange\Exception\RuntimeException;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class OnlineChangeRunner
@@ -27,7 +29,11 @@ class OnlineChangeRunner
         );
         $process = new Process($cmd);
 
-        $process->mustRun();
+        try {
+            $process->mustRun();
+        } catch (ProcessFailedException $e) {
+            throw RuntimeException::fromProcessFailException($e);
+        }
     }
 
     private function getOptions(OnlineChange $onlineChange): array
