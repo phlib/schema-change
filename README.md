@@ -41,6 +41,7 @@ $create->addColumn('id', 'int(11)')->unsigned()->notNull()->autoIncrement();
 $create->addColumn('folder_id', 'int(11)')->notNull();
 $create->addColumn('name', 'varchar(255)')->notNull();
 $create->addColumn('data', 'text')->notNull()->defaultTo('');
+$create->addColumn('create_ts', 'timestamp')->notNull()->defaultRaw('CURRENT_TIMESTAMP')
 
 $create->primary('id');
 $create->addIndex('folder_id', 'name')->unique();
@@ -57,6 +58,8 @@ $alter = $schemaChange->alter('widget')
 
 $alter->removeColumn('data');
 $alter->addColumn('alias', 'varchar(100)')->nullable()->after('name');
+$alter->addColumn('update_ts', 'timestamp')->after('create_ts')->notNull()
+    ->defaultRaw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
 
 $alter->removeIndex('widget_folder_id_name_idx');
 

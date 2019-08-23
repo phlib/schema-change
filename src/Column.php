@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
 
+use Phlib\Db\SqlFragment;
+
 class Column
 {
     use FormatterTrait;
@@ -46,7 +48,7 @@ class Column
     private $nullable;
 
     /**
-     * @var array
+     * @var string|SqlFragment
      */
     private $default;
 
@@ -126,25 +128,17 @@ class Column
         return $this;
     }
 
-    /**
-     * Set column default
-     *
-     * Pass `null` for value to remove column default
-     *
-     * @param string|null $value
-     * @param bool $isConstant
-     * @return self
-     */
-    public function defaultTo(?string $value, bool $isConstant = false): self
+    public function defaultTo(string $value): self
     {
-        if ($value === null) {
-            $this->default = null;
-        } else {
-            $this->default = [$value, $isConstant];
-        }
+        $this->default = $value;
         return $this;
     }
 
+    public function defaultRaw(string $value): self
+    {
+        $this->default = new SqlFragment($value);
+        return $this;
+    }
 
     public function encoding(string $encoding, ?string $collate = null): self
     {
@@ -177,11 +171,11 @@ class Column
         $definition[] = ($this->nullable === false) ? 'NOT NULL' : 'NULL';
 
         if (isset($this->default)) {
-            [$value, $isConstant] = $this->default;
-            if (!$isConstant) {
+            $value = $this->default;
+            if (!$value instanceof SqlFragment) {
                 $value = $this->quoteValue($value);
             }
-            $definition[] = 'DEFAULT ' . $value;
+            $definition[] = 'DEFAULT ' . (string)$value;
         }
 
         if ($this->auto === true) {
