@@ -14,9 +14,17 @@
         "phlib/db": "^1.1",
         "symfony/process": "^4.3"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    },
     "autoload": {
         "psr-4": {
             "Phlib\\SchemaChange\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phlib\\SchemaChange\\Tests\\": "tests/"
         }
     }
 }
