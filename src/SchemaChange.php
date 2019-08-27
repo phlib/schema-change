@@ -28,10 +28,10 @@ class SchemaChange
      */
     private $onlineChangeRunner;
 
-    public function __construct(Adapter $db, OnlineChangeRunner $onlineChangeRunner = null)
+    public function __construct(Adapter $db, OnlineChangeRunner $onlineChangeRunner = null, Formatter $formatter = null)
     {
         $this->db = $db;
-        $this->formatter = new DbFormatter($this->db);
+        $this->formatter = $formatter ?? new DbFormatter($this->db);
         $this->onlineChangeRunner = $onlineChangeRunner;
     }
 
