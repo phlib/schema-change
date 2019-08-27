@@ -14,9 +14,19 @@ class OnlineChangeRunner
      */
     private $binPath;
 
-    public function __construct(array $binPath)
+    /**
+     * @var \Closure {
+     *     @return Process
+     * }
+     */
+    private $processFactory;
+
+    public function __construct(array $binPath, ?\Closure $processFactory = null)
     {
         $this->binPath = $binPath;
+        $this->processFactory = $processFactory ?? function (...$args) {
+            return new Process(...$args);
+        };
     }
 
     public function execute(array $dbConfig, OnlineChange $onlineChange): void
@@ -27,7 +37,7 @@ class OnlineChangeRunner
             $this->getOptions($onlineChange),
             ['--alter', $onlineChange->toOnlineAlter()]
         );
-        $process = new Process($cmd);
+        $process = $this->getProcess($cmd);
 
         try {
             $process->mustRun();
@@ -71,5 +81,10 @@ class OnlineChangeRunner
             $dsn .= ",P={$dbConfig['port']}";
         }
         return $dsn;
+    }
+
+    private function getProcess(...$args): Process
+    {
+        return ($this->processFactory)(...$args);
     }
 }
