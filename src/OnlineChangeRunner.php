@@ -10,7 +10,7 @@ use Symfony\Component\Process\Process;
 class OnlineChangeRunner
 {
     /**
-     * @var array
+     * @var string
      */
     private $binPath;
 
@@ -21,10 +21,10 @@ class OnlineChangeRunner
      */
     private $processFactory;
 
-    public function __construct(array $binPath, ?\Closure $processFactory = null)
+    public function __construct(string $binPath, ?\Closure $processFactory = null)
     {
         $this->binPath = $binPath;
-        $this->processFactory = $processFactory ?? function (...$args) {
+        $this->processFactory = $processFactory ?? static function (...$args) {
             return new Process(...$args);
         };
     }
@@ -32,8 +32,7 @@ class OnlineChangeRunner
     public function execute(array $dbConfig, OnlineChange $onlineChange): void
     {
         $cmd = array_merge(
-            $this->binPath,
-            [$this->buildDsn($dbConfig, $onlineChange->getName())],
+            [$this->binPath, $this->buildDsn($dbConfig, $onlineChange->getName())],
             $this->getOptions($onlineChange),
             ['--alter', $onlineChange->toOnlineAlter()]
         );
