@@ -20,7 +20,7 @@ $db = new Phlib\Db\Adapter([
 
 $schemaChange = new \Phlib\SchemaChange\SchemaChange(
     $db,
-    new \Phlib\SchemaChange\OnlineChangeRunner(['/usr/local/bin/pt-online-schema-change'])
+    new \Phlib\SchemaChange\OnlineChangeRunner('/usr/local/bin/pt-online-schema-change')
 );
 
 $schemaChange->mapNames(new class implements \Phlib\SchemaChange\NameMapper {
