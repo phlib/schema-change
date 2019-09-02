@@ -6,6 +6,7 @@ namespace Phlib\SchemaChange;
 use Phlib\Db\Adapter;
 use Phlib\Db\Exception\Exception as DbException;
 use Phlib\SchemaChange\Exception\RuntimeException;
+use Phlib\SchemaChange\Formatter\Db as DbFormatter;
 use Phlib\SchemaChange\Table\Alter;
 use Phlib\SchemaChange\Table\Create;
 use Phlib\SchemaChange\Table\Drop;
@@ -18,7 +19,7 @@ class SchemaChange
     private $db;
 
     /**
-     * @var Formatter
+     * @var DbFormatter
      */
     private $formatter;
 
@@ -27,10 +28,10 @@ class SchemaChange
      */
     private $onlineChangeRunner;
 
-    public function __construct(Adapter $db, OnlineChangeRunner $onlineChangeRunner = null)
+    public function __construct(Adapter $db, OnlineChangeRunner $onlineChangeRunner = null, Formatter $formatter = null)
     {
         $this->db = $db;
-        $this->formatter = new Formatter($this->db);
+        $this->formatter = $formatter ?? new DbFormatter($this->db);
         $this->onlineChangeRunner = $onlineChangeRunner;
     }
 
