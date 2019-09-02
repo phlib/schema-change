@@ -35,7 +35,7 @@ class OnlineChangeRunnerTest extends TestCase
         $process->expects(static::once())
             ->method('mustRun');
 
-        $onlineChangeRunner = new OnlineChangeRunner(['path_to_bin'], $processFactory);
+        $onlineChangeRunner = new OnlineChangeRunner('path_to_bin', $processFactory);
         $onlineChangeRunner->execute($dbConfig, $onlineChange);
 
         static::assertIsArray($passedCmd);
@@ -67,7 +67,7 @@ class OnlineChangeRunnerTest extends TestCase
             ->method('mustRun')
             ->willThrowException(static::createMock(ProcessFailedException::class));
 
-        $onlineChangeRunner = new OnlineChangeRunner(['path_to_bin'], $processFactory);
+        $onlineChangeRunner = new OnlineChangeRunner('path_to_bin', $processFactory);
         $onlineChangeRunner->execute($dbConfig, $onlineChange);
     }
 
