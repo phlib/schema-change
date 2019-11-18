@@ -48,6 +48,14 @@ class Create extends Table
         return $index;
     }
 
+    public function addKey(string $name, string ...$columns): Index
+    {
+        $index = new Index($this->formatter, $this->table, ...$columns);
+        $index->name($name);
+        $this->addIndexes[] = $index;
+        return $index;
+    }
+
     public function addPrimary(string ...$columns): self
     {
         $this->primary = $columns;

@@ -96,6 +96,12 @@ class Alter extends Create implements OnlineChange
         return $this;
     }
 
+    public function removeKey(string $keyName): self
+    {
+        $this->removeIndexes[] = $keyName;
+        return $this;
+    }
+
     public function force(): self
     {
         $this->force = true;
