@@ -5,8 +5,11 @@
     "license": "LGPL-3.0",
     "authors": [
         {
-            "name": "Martin Price",
-            "email": "martin.price@xtremepush.com"
+            "name": "Martin Price"
+        },
+        {
+            "name": "Phlib Team",
+            "homepage": "https://github.com/phlib/schema-change/contributors"
         }
     ],
     "require": {
