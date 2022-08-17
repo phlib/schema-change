@@ -1,5 +1,11 @@
 # phlib/schema-change
 
+[![Code Checks](https://img.shields.io/github/workflow/status/phlib/schema-change/CodeChecks?logo=github)](https://github.com/phlib/schema-change/actions/workflows/code-checks.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/phlib/schema-change.svg?logo=codecov)](https://codecov.io/gh/phlib/schema-change)
+[![Latest Stable Version](https://img.shields.io/packagist/v/phlib/schema-change.svg?logo=packagist)](https://packagist.org/packages/phlib/schema-change)
+[![Total Downloads](https://img.shields.io/packagist/dt/phlib/schema-change.svg?logo=packagist)](https://packagist.org/packages/phlib/schema-change)
+![Licence](https://img.shields.io/github/license/phlib/schema-change.svg)
+
 Library for performing MySQL DDL operations, using either simple SQL or Percona Tools Online Schema Change.
 
 This library is designed to be able to be used in any existing migrations management tool.
