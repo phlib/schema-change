@@ -73,7 +73,7 @@ class Create extends Table
         $tableName = $this->tableIdentifier($this->table);
         $ddl = "CREATE TABLE {$tableName} (\n";
 
-        $rows = array();
+        $rows = [];
         foreach ($this->addColumns as $column) {
             $rows[] = (string)$column;
         }
