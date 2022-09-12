@@ -6,17 +6,18 @@ namespace Phlib\SchemaChange\Tests\Formatter;
 use Phlib\Db\Adapter;
 use Phlib\SchemaChange\Formatter\Db;
 use Phlib\SchemaChange\NameMapper;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class DbTest extends TestCase
 {
     /**
-     * @var Adapter
+     * @var Adapter|MockObject
      */
     private $db;
 
     /**
-     * @var Adapter\QuoteHandler
+     * @var Adapter\QuoteHandler|MockObject
      */
     private $quoter;
 
@@ -31,7 +32,7 @@ class DbTest extends TestCase
         parent::setUp();
     }
 
-    public function testQuoteIdentifier()
+    public function testQuoteIdentifier(): void
     {
         $identifier = 'my_identifier';
 
@@ -44,7 +45,7 @@ class DbTest extends TestCase
         static::assertEquals("`$identifier`", $formatter->quoteIdentifier($identifier));
     }
 
-    public function testQuoteValue()
+    public function testQuoteValue(): void
     {
         $value = 'my value';
 
@@ -57,7 +58,7 @@ class DbTest extends TestCase
         static::assertEquals("'$value'", $formatter->quoteValue($value));
     }
 
-    public function testTableIdentifier()
+    public function testTableIdentifier(): void
     {
         $table = 'my_table';
 
@@ -70,7 +71,7 @@ class DbTest extends TestCase
         static::assertEquals("`$table`", $formatter->tableIdentifier($table));
     }
 
-    public function testTableIdentifierWithMapping()
+    public function testTableIdentifierWithMapping(): void
     {
         $nameMapper = new class implements NameMapper {
             public function mapTableName(string $table): string

@@ -20,7 +20,7 @@ trait FormatterTrait
         return $this->formatter->quoteIdentifier($identifier);
     }
 
-    protected function quoteIdentifiers(string ...$identifiers)
+    protected function quoteIdentifiers(string ...$identifiers): array
     {
         return array_map([$this, 'quoteIdentifier'], $identifiers);
     }

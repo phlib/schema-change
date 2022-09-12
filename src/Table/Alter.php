@@ -20,7 +20,7 @@ class Alter extends Create implements OnlineChange
     private $dropDefaultColumns = [];
 
     /**
-     * @var string[]
+     * @var Column[]
      */
     private $changeColumns = [];
 
@@ -65,10 +65,6 @@ class Alter extends Create implements OnlineChange
      * Change a column definition
      *
      * The full column definition must be supplied
-     *
-     * @param string $columnName
-     * @param string $type
-     * @return Column
      */
     public function changeColumn(string $columnName, string $type): Column
     {

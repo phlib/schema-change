@@ -21,7 +21,7 @@ class AlterTest extends TestCase
         parent::setUp();
     }
 
-    public function testRenameTable()
+    public function testRenameTable(): void
     {
         $table = new Alter($this->formatter, 'old_table_name');
         $table->rename('new_table_name');
@@ -33,7 +33,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testDropColumnDefault()
+    public function testDropColumnDefault(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->dropColumnDefault('column_name');
@@ -45,7 +45,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testAddColumn()
+    public function testAddColumn(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->addColumn('column_name', 'INT(11)');
@@ -57,7 +57,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testChangeColumn()
+    public function testChangeColumn(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->changeColumn('column_name', 'INT(11)')
@@ -72,7 +72,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testRemoveColumn()
+    public function testRemoveColumn(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->removeColumn('column_name');
@@ -84,7 +84,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testRemovePrimary()
+    public function testRemovePrimary(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->removePrimary();
@@ -96,7 +96,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testAddPrimary()
+    public function testAddPrimary(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->addPrimary('column_1', 'column_2');
@@ -108,7 +108,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testPrimary()
+    public function testPrimary(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->primary('column_1', 'column_2');
@@ -121,7 +121,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testAddIndex()
+    public function testAddIndex(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->addIndex('column_1', 'column_2')
@@ -135,7 +135,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testRemoveIndex()
+    public function testRemoveIndex(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->removeIndex('my_idx');
@@ -147,7 +147,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testAttributes()
+    public function testAttributes(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->attribute('DEFAULT CHARSET', 'ascii');
@@ -159,7 +159,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testForce()
+    public function testForce(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->force();
@@ -171,7 +171,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testComplex()
+    public function testComplex(): void
     {
         $table = new Alter($this->formatter, 'table_name');
         $table->rename('new_name');

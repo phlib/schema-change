@@ -24,7 +24,7 @@ class OnlineChangeRunner
     public function __construct(string $binPath, ?\Closure $processFactory = null)
     {
         $this->binPath = $binPath;
-        $this->processFactory = $processFactory ?? static function (...$args) {
+        $this->processFactory = $processFactory ?? static function (...$args): Process {
             return new Process(...$args);
         };
     }

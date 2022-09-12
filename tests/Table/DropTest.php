@@ -21,7 +21,7 @@ class DropTest extends TestCase
         parent::setUp();
     }
 
-    public function testDrop()
+    public function testDrop(): void
     {
         $table = new Drop($this->formatter, 'table_name');
 

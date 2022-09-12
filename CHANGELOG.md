@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Type declarations have been added to all method parameters and return types
+  where possible.
 - Apply GNU LGPLv3 software licence
 ### Removed
 - **BC break**: Removed support for PHP versions <= v7.1 as they are no longer
