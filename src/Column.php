@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
@@ -10,6 +11,7 @@ class Column
     use FormatterTrait;
 
     private const POSITION_FIRST = 'FIRST';
+
     private const POSITION_AFTER = 'AFTER';
 
     /**

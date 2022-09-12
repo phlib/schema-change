@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Tests\Formatter;
@@ -39,10 +40,10 @@ class DbTest extends TestCase
         $this->quoter->expects(static::once())
             ->method('identifier')
             ->with($identifier)
-            ->willReturn("`$identifier`");
+            ->willReturn("`{$identifier}`");
 
         $formatter = new Db($this->db);
-        static::assertEquals("`$identifier`", $formatter->quoteIdentifier($identifier));
+        static::assertEquals("`{$identifier}`", $formatter->quoteIdentifier($identifier));
     }
 
     public function testQuoteValue(): void
@@ -52,10 +53,10 @@ class DbTest extends TestCase
         $this->quoter->expects(static::once())
             ->method('value')
             ->with($value)
-            ->willReturn("'$value'");
+            ->willReturn("'{$value}'");
 
         $formatter = new Db($this->db);
-        static::assertEquals("'$value'", $formatter->quoteValue($value));
+        static::assertEquals("'{$value}'", $formatter->quoteValue($value));
     }
 
     public function testTableIdentifier(): void
@@ -65,15 +66,15 @@ class DbTest extends TestCase
         $this->quoter->expects(static::once())
             ->method('identifier')
             ->with($table)
-            ->willReturn("`$table`");
+            ->willReturn("`{$table}`");
 
         $formatter = new Db($this->db);
-        static::assertEquals("`$table`", $formatter->tableIdentifier($table));
+        static::assertEquals("`{$table}`", $formatter->tableIdentifier($table));
     }
 
     public function testTableIdentifierWithMapping(): void
     {
-        $nameMapper = new class implements NameMapper {
+        $nameMapper = new class() implements NameMapper {
             public function mapTableName(string $table): string
             {
                 return "my_{$table}_name";
@@ -84,11 +85,11 @@ class DbTest extends TestCase
 
         $this->quoter->expects(static::once())
             ->method('identifier')
-            ->with("my_table_name")
-            ->willReturn("`my_table_name`");
+            ->with('my_table_name')
+            ->willReturn('`my_table_name`');
 
         $formatter = new Db($this->db);
         $formatter->setNameMapper($nameMapper);
-        static::assertEquals("`my_table_name`", $formatter->tableIdentifier($table));
+        static::assertEquals('`my_table_name`', $formatter->tableIdentifier($table));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
@@ -59,7 +60,7 @@ class Index
         $name = $this->quoteIdentifier($this->name ?? $this->generateName());
         $fields = implode(', ', $this->quoteIdentifiers(...$this->columns));
 
-        return $prepend . "KEY $name ($fields)";
+        return $prepend . "KEY {$name} ({$fields})";
     }
 
     public function __toString(): string

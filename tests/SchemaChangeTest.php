@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Tests;
@@ -136,7 +137,9 @@ SQL;
         $onlineChangeRunner = $this->createMock(OnlineChangeRunner::class);
         $formatter = new Formatter\TestFake();
         $change = $this->getDummyOnlineChange();
-        $dbConfig = ['db'=>'config'];
+        $dbConfig = [
+            'db' => 'config',
+        ];
 
         $db->expects(static::once())
             ->method('getConfig')
@@ -152,7 +155,7 @@ SQL;
 
     private function getDummyOnlineChange(): Change
     {
-        return new class implements OnlineChange, Change {
+        return new class() implements OnlineChange, Change {
             public function getName(): string
             {
                 return 'table_name';

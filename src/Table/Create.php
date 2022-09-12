@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Table;
@@ -81,7 +82,7 @@ class Create extends Table
         // primary key
         if (isset($this->primary)) {
             $primary = implode(',', $this->quoteIdentifiers(...$this->primary));
-            $rows[] = "PRIMARY KEY ($primary)";
+            $rows[] = "PRIMARY KEY ({$primary})";
         }
 
         // indexes (key)

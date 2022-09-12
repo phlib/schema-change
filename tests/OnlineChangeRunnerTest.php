@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Tests;
@@ -74,7 +75,7 @@ class OnlineChangeRunnerTest extends TestCase
 
     private function getDummyOnlineChange(): OnlineChange
     {
-        return new class implements OnlineChange {
+        return new class() implements OnlineChange {
             public function getName(): string
             {
                 return 'table_name';
