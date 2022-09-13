@@ -10,40 +10,19 @@ use Phlib\SchemaChange\OnlineChange;
 
 class Alter extends Create implements OnlineChange
 {
-    /**
-     * @var string
-     */
-    private $newName;
+    private string $newName;
 
-    /**
-     * @var string[]
-     */
-    private $dropDefaultColumns = [];
+    private array $dropDefaultColumns = [];
 
-    /**
-     * @var Column[]
-     */
-    private $changeColumns = [];
+    private array $changeColumns = [];
 
-    /**
-     * @var string[]
-     */
-    private $removeColumns = [];
+    private array $removeColumns = [];
 
-    /**
-     * @var string[]
-     */
-    private $removeIndexes = [];
+    private array $removeIndexes = [];
 
-    /**
-     * @var bool
-     */
-    private $force = false;
+    private bool $force = false;
 
-    /**
-     * @var bool
-     */
-    private $onlineChange = false;
+    private bool $onlineChange = false;
 
     public function getName(): string
     {
@@ -82,7 +61,7 @@ class Alter extends Create implements OnlineChange
 
     public function removePrimary(): self
     {
-        $this->primary = null;
+        unset($this->primary);
         $this->primaryRemoveOld = true;
         return $this;
     }

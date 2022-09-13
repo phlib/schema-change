@@ -11,10 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class AlterTest extends TestCase
 {
-    /**
-     * @var Formatter
-     */
-    private $formatter;
+    private Formatter $formatter;
 
     public function setUp(): void
     {
