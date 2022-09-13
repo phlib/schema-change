@@ -188,9 +188,9 @@ class Column
             [$position, $value] = $this->position;
             $position = strtoupper($position);
             $value = trim((string)$value);
-            if ($position == self::POSITION_FIRST) {
+            if ($position === self::POSITION_FIRST) {
                 $definition[] = $position;
-            } elseif ($value != '') {
+            } elseif ($value !== '') {
                 $definition[] = $position . ' ' . $this->quoteIdentifier($value);
             }
         }

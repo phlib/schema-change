@@ -24,12 +24,5 @@ return static function (ECSConfig $ecsConfig): void {
         // Remove sniff, from common/spaces
         \PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer::class,
         \PhpCsFixer\Fixer\CastNotation\CastSpacesFixer::class,
-
-        // Save strict to later
-        \PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer::class,
-        \PhpCsFixer\Fixer\Strict\StrictParamFixer::class,
-        \PhpCsFixer\Fixer\Strict\StrictComparisonFixer::class,
-        \PhpCsFixer\Fixer\PhpUnit\PhpUnitStrictFixer::class,
-        \PhpCsFixer\Fixer\PhpUnit\PhpUnitSetUpTearDownVisibilityFixer::class,
     ]);
 };
