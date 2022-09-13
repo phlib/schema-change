@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Tests\Table;
@@ -21,7 +22,7 @@ class DropTest extends TestCase
         parent::setUp();
     }
 
-    public function testDrop()
+    public function testDrop(): void
     {
         $table = new Drop($this->formatter, 'table_name');
 

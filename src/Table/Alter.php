@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Table;
 
 use Phlib\SchemaChange\Column;
-use Phlib\SchemaChange\OnlineChange;
 use Phlib\SchemaChange\Exception\OnlineChangeException;
+use Phlib\SchemaChange\OnlineChange;
 
 class Alter extends Create implements OnlineChange
 {
@@ -20,7 +21,7 @@ class Alter extends Create implements OnlineChange
     private $dropDefaultColumns = [];
 
     /**
-     * @var string[]
+     * @var Column[]
      */
     private $changeColumns = [];
 
@@ -65,10 +66,6 @@ class Alter extends Create implements OnlineChange
      * Change a column definition
      *
      * The full column definition must be supplied
-     *
-     * @param string $columnName
-     * @param string $type
-     * @return Column
      */
     public function changeColumn(string $columnName, string $type): Column
     {
@@ -163,7 +160,7 @@ class Alter extends Create implements OnlineChange
         }
         if (isset($this->primary)) {
             $primary = implode(',', $this->quoteIdentifiers(...$this->primary));
-            $cmds[] = "ADD PRIMARY KEY ($primary)";
+            $cmds[] = "ADD PRIMARY KEY ({$primary})";
         }
         // add indexes (key)
         foreach ($this->addIndexes as $index) {

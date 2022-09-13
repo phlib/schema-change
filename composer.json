@@ -13,11 +13,12 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "phlib/db": "^1.1",
         "symfony/process": "^4.0"
     },
     "require-dev": {
+        "symplify/easy-coding-standard": "^11",
         "phpunit/phpunit": "^7.5"
     },
     "autoload": {
@@ -29,5 +30,9 @@
         "psr-4": {
             "Phlib\\SchemaChange\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "cs-check": "vendor/bin/ecs",
+        "cs-fix": "vendor/bin/ecs --fix"
     }
 }

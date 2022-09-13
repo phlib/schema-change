@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Tests;
@@ -19,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class SchemaChangeTest extends TestCase
 {
-    public function testMapNames()
+    public function testMapNames(): void
     {
         $db = $this->createMock(Adapter::class);
         $formatter = $this->createMock(Formatter::class);
@@ -33,7 +34,7 @@ class SchemaChangeTest extends TestCase
         $schemaChange->mapNames($nameMapper);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $db = $this->createMock(Adapter::class);
         $formatter = new Formatter\TestFake();
@@ -54,7 +55,7 @@ SQL;
         static::assertEquals($expected, $create->toSql());
     }
 
-    public function testAlter()
+    public function testAlter(): void
     {
         $db = $this->createMock(Adapter::class);
         $formatter = new Formatter\TestFake();
@@ -74,7 +75,7 @@ SQL;
         static::assertEquals($expected, $alter->toSql());
     }
 
-    public function testDrop()
+    public function testDrop(): void
     {
         $db = $this->createMock(Adapter::class);
         $formatter = new Formatter\TestFake();
@@ -91,7 +92,7 @@ SQL;
         static::assertEquals($expected, $drop->toSql());
     }
 
-    public function testExecuteChange()
+    public function testExecuteChange(): void
     {
         $db = $this->createMock(Adapter::class);
         $formatter = new Formatter\TestFake();
@@ -109,7 +110,7 @@ SQL;
         $schemaChange->execute($change);
     }
 
-    public function testExecuteChangeException()
+    public function testExecuteChangeException(): void
     {
         static::expectException(RuntimeException::class);
 
@@ -130,13 +131,15 @@ SQL;
         $schemaChange->execute($change);
     }
 
-    public function testExecuteOnlineChange()
+    public function testExecuteOnlineChange(): void
     {
         $db = $this->createMock(Adapter::class);
         $onlineChangeRunner = $this->createMock(OnlineChangeRunner::class);
         $formatter = new Formatter\TestFake();
         $change = $this->getDummyOnlineChange();
-        $dbConfig = ['db'=>'config'];
+        $dbConfig = [
+            'db' => 'config',
+        ];
 
         $db->expects(static::once())
             ->method('getConfig')
@@ -152,7 +155,7 @@ SQL;
 
     private function getDummyOnlineChange(): Change
     {
-        return new class implements OnlineChange, Change {
+        return new class() implements OnlineChange, Change {
             public function getName(): string
             {
                 return 'table_name';

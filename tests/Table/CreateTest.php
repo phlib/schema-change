@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Tests\Table;
@@ -21,7 +22,7 @@ class CreateTest extends TestCase
         parent::setUp();
     }
 
-    public function testAddColumn()
+    public function testAddColumn(): void
     {
         $table = new Create($this->formatter, 'table_name');
         $table->addColumn('column_name', 'INT(11)');
@@ -34,7 +35,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testAddPrimary()
+    public function testAddPrimary(): void
     {
         $table = new Create($this->formatter, 'table_name');
         $table->addPrimary('column_1', 'column_2');
@@ -47,7 +48,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testPrimary()
+    public function testPrimary(): void
     {
         $table = new Create($this->formatter, 'table_name');
         $table->primary('column_1', 'column_2');
@@ -60,7 +61,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testAddIndex()
+    public function testAddIndex(): void
     {
         $table = new Create($this->formatter, 'table_name');
         $table->addIndex('column_1', 'column_2')
@@ -75,7 +76,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testAttributes()
+    public function testAttributes(): void
     {
         $table = new Create($this->formatter, 'table_name');
         $table->addColumn('column_1', 'INT(11)')->notNull();
@@ -89,7 +90,7 @@ SQL;
         static::assertEquals($expected, $table->toSql());
     }
 
-    public function testComplex()
+    public function testComplex(): void
     {
         $table = new Create($this->formatter, 'table_name');
         $table->addColumn('column_1', 'INT(11)')->notNull()->autoIncrement();

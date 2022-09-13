@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Exception;
@@ -10,7 +11,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class RuntimeException extends \RuntimeException implements Exception
 {
-    public static function fromDbException(DbException $e)
+    public static function fromDbException(DbException $e): self
     {
         if ($e instanceof DbRuntimeException || $e instanceof InvalidQueryException) {
             $newSelf = new static($e->getMessage(), 0, $e);
@@ -20,7 +21,7 @@ class RuntimeException extends \RuntimeException implements Exception
         return new static('Unknown DB exception', 0, $e);
     }
 
-    public static function fromProcessFailException(ProcessFailedException $e)
+    public static function fromProcessFailException(ProcessFailedException $e): self
     {
         return new static($e->getMessage(), $e->getCode(), $e);
     }

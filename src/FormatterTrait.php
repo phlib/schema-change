@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
@@ -20,7 +21,7 @@ trait FormatterTrait
         return $this->formatter->quoteIdentifier($identifier);
     }
 
-    protected function quoteIdentifiers(string ...$identifiers)
+    protected function quoteIdentifiers(string ...$identifiers): array
     {
         return array_map([$this, 'quoteIdentifier'], $identifiers);
     }

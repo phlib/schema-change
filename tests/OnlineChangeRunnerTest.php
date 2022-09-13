@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange\Tests;
@@ -6,17 +7,18 @@ namespace Phlib\SchemaChange\Tests;
 use Phlib\SchemaChange\Exception\RuntimeException;
 use Phlib\SchemaChange\OnlineChange;
 use Phlib\SchemaChange\OnlineChangeRunner;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class OnlineChangeRunnerTest extends TestCase
 {
-    public function testExecute()
+    public function testExecute(): void
     {
         $process = $this->createMock(Process::class);
         $passedCmd = null;
-        $processFactory = function ($cmd) use ($process, &$passedCmd) {
+        $processFactory = function ($cmd) use ($process, &$passedCmd): MockObject {
             $passedCmd = $cmd;
             return $process;
         };
@@ -44,12 +46,12 @@ class OnlineChangeRunnerTest extends TestCase
         static::assertEquals(['--alter', 'DO STUFF TO `table_name`'], array_slice($passedCmd, -2));
     }
 
-    public function testExecuteException()
+    public function testExecuteException(): void
     {
         static::expectException(RuntimeException::class);
 
         $process = $this->createMock(Process::class);
-        $processFactory = function () use ($process) {
+        $processFactory = function () use ($process): MockObject {
             return $process;
         };
 
@@ -73,7 +75,7 @@ class OnlineChangeRunnerTest extends TestCase
 
     private function getDummyOnlineChange(): OnlineChange
     {
-        return new class implements OnlineChange {
+        return new class() implements OnlineChange {
             public function getName(): string
             {
                 return 'table_name';

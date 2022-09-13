@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
@@ -24,7 +25,7 @@ class OnlineChangeRunner
     public function __construct(string $binPath, ?\Closure $processFactory = null)
     {
         $this->binPath = $binPath;
-        $this->processFactory = $processFactory ?? static function (...$args) {
+        $this->processFactory = $processFactory ?? static function (...$args): Process {
             return new Process(...$args);
         };
     }

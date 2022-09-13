@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
@@ -19,12 +20,12 @@ class SchemaChange
     private $db;
 
     /**
-     * @var DbFormatter
+     * @var Formatter
      */
     private $formatter;
 
     /**
-     * @var OnlineChangeRunner
+     * @var OnlineChangeRunner|null
      */
     private $onlineChangeRunner;
 
