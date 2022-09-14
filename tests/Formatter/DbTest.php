@@ -22,13 +22,12 @@ class DbTest extends TestCase
      */
     private $quoter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->quoter = $this->createMock(Adapter\QuoteHandler::class);
         $this->db = $this->createMock(Adapter::class);
 
-        $this->db->expects(static::any())
-            ->method('quote')
+        $this->db->method('quote')
             ->willReturn($this->quoter);
         parent::setUp();
     }

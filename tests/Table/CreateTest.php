@@ -13,7 +13,7 @@ class CreateTest extends TestCase
 {
     private Formatter $formatter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->formatter = new FakeFormatter();
         parent::setUp();
