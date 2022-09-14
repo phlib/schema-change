@@ -13,27 +13,18 @@ class Create extends Table
     /**
      * @var Column[]
      */
-    protected $addColumns = [];
+    protected array $addColumns = [];
 
-    /**
-     * @var string[]
-     */
-    protected $primary;
+    protected array $primary;
 
-    /**
-     * @var bool
-     */
-    protected $primaryRemoveOld;
+    protected bool $primaryRemoveOld = false;
 
     /**
      * @var Index[]
      */
-    protected $addIndexes = [];
+    protected array $addIndexes = [];
 
-    /**
-     * @var array
-     */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     public function addColumn(string $name, string $type): Column
     {

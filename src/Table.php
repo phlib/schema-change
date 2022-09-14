@@ -8,10 +8,7 @@ abstract class Table implements Change
 {
     use FormatterTrait;
 
-    /**
-     * @var string
-     */
-    protected $table;
+    protected string $table;
 
     public function __construct(Formatter $formatter, string $table)
     {

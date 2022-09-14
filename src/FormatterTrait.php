@@ -6,10 +6,7 @@ namespace Phlib\SchemaChange;
 
 trait FormatterTrait
 {
-    /**
-     * @var Formatter
-     */
-    protected $formatter;
+    protected Formatter $formatter;
 
     protected function tableIdentifier(string $tableIdentifer): string
     {

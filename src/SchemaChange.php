@@ -14,20 +14,11 @@ use Phlib\SchemaChange\Table\Drop;
 
 class SchemaChange
 {
-    /**
-     * @var Adapter
-     */
-    private $db;
+    private Adapter $db;
 
-    /**
-     * @var Formatter
-     */
-    private $formatter;
+    private Formatter $formatter;
 
-    /**
-     * @var OnlineChangeRunner|null
-     */
-    private $onlineChangeRunner;
+    private ?OnlineChangeRunner $onlineChangeRunner;
 
     public function __construct(Adapter $db, OnlineChangeRunner $onlineChangeRunner = null, Formatter $formatter = null)
     {

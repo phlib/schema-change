@@ -10,17 +10,14 @@ use Symfony\Component\Process\Process;
 
 class OnlineChangeRunner
 {
-    /**
-     * @var string
-     */
-    private $binPath;
+    private string $binPath;
 
     /**
      * @var \Closure {
      *     @return Process
      * }
      */
-    private $processFactory;
+    private \Closure $processFactory;
 
     public function __construct(string $binPath, ?\Closure $processFactory = null)
     {

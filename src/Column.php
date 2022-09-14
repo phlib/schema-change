@@ -14,55 +14,28 @@ class Column
 
     private const POSITION_AFTER = 'AFTER';
 
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
-    /**
-     * @var string
-     */
-    private $newName;
+    private string $newName;
 
-    /**
-     * @var bool
-     */
-    private $unsigned;
+    private bool $unsigned;
 
-    /**
-     * @var string
-     */
-    private $encoding;
+    private string $encoding;
 
-    /**
-     * @var string
-     */
-    private $collate;
+    private string $collate;
 
-    /**
-     * @var bool
-     */
-    private $nullable;
+    private bool $nullable = true;
 
     /**
      * @var string|SqlFragment
      */
     private $default;
 
-    /**
-     * @var bool
-     */
-    private $auto;
+    private bool $auto;
 
-    /**
-     * @var array
-     */
-    private $position;
+    private array $position;
 
     public function __construct(Formatter $formatter, string $name, string $type)
     {
@@ -160,7 +133,7 @@ class Column
             $columnName = $this->quoteIdentifier($this->newName);
         }
 
-        if ($this->unsigned === true) {
+        if (isset($this->unsigned) && $this->unsigned === true) {
             $definition[] = 'UNSIGNED';
         }
         if (isset($this->encoding)) {
@@ -180,7 +153,7 @@ class Column
             $definition[] = 'DEFAULT ' . (string)$value;
         }
 
-        if ($this->auto === true) {
+        if (isset($this->auto) && $this->auto === true) {
             $definition[] = 'AUTO_INCREMENT';
         }
 
@@ -188,9 +161,9 @@ class Column
             [$position, $value] = $this->position;
             $position = strtoupper($position);
             $value = trim((string)$value);
-            if ($position == self::POSITION_FIRST) {
+            if ($position === self::POSITION_FIRST) {
                 $definition[] = $position;
-            } elseif ($value != '') {
+            } elseif ($value !== '') {
                 $definition[] = $position . ' ' . $this->quoteIdentifier($value);
             }
         }

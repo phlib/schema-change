@@ -10,15 +10,9 @@ use Phlib\SchemaChange\NameMapper;
 
 class Db implements Formatter
 {
-    /**
-     * @var Adapter
-     */
-    private $db;
+    private Adapter $db;
 
-    /**
-     * @var NameMapper
-     */
-    private $nameMapper;
+    private NameMapper $nameMapper;
 
     public function __construct(Adapter $db)
     {

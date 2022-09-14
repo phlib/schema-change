@@ -11,12 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class AlterTest extends TestCase
 {
-    /**
-     * @var Formatter
-     */
-    private $formatter;
+    private Formatter $formatter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->formatter = new FakeFormatter();
         parent::setUp();

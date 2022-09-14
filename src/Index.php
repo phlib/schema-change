@@ -8,25 +8,13 @@ class Index
 {
     use FormatterTrait;
 
-    /**
-     * @var string
-     */
-    private $tableName;
+    private string $tableName;
 
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var string[]
-     */
-    private $columns;
+    private array $columns;
 
-    /**
-     * @var bool
-     */
-    private $unique;
+    private bool $unique;
 
     public function __construct(
         Formatter $formatter,
@@ -53,7 +41,7 @@ class Index
     public function toSql(): string
     {
         $prepend = '';
-        if ($this->unique) {
+        if (isset($this->unique) && $this->unique) {
             $prepend = 'UNIQUE ';
         }
 
