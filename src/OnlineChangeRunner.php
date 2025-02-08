@@ -32,7 +32,7 @@ class OnlineChangeRunner
         $cmd = array_merge(
             [$this->binPath, $this->buildDsn($dbConfig, $onlineChange->getName())],
             $this->getOptions($onlineChange),
-            ['--alter', $onlineChange->toOnlineAlter()]
+            ['--alter', $onlineChange->toOnlineAlter()],
         );
         $process = $this->getProcess($cmd);
 

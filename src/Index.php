@@ -19,7 +19,7 @@ class Index implements \Stringable
     public function __construct(
         Formatter $formatter,
         string $tableName,
-        string ...$columns
+        string ...$columns,
     ) {
         $this->formatter = $formatter;
         $this->tableName = $tableName;
