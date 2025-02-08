@@ -11,7 +11,6 @@ class TestFake implements Formatter
 {
     public function setNameMapper(NameMapper $nameMapper): void
     {
-        return;
     }
 
     public function tableIdentifier(string $tableIdentifier): string

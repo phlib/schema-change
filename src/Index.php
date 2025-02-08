@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
 
-class Index
+class Index implements \Stringable
 {
     use FormatterTrait;
 

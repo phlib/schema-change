@@ -6,7 +6,7 @@ namespace Phlib\SchemaChange;
 
 use Phlib\Db\SqlFragment;
 
-class Column
+class Column implements \Stringable
 {
     use FormatterTrait;
 
@@ -28,10 +28,7 @@ class Column
 
     private bool $nullable = true;
 
-    /**
-     * @var string|SqlFragment
-     */
-    private $default;
+    private string|SqlFragment $default;
 
     private bool $auto;
 
@@ -150,7 +147,7 @@ class Column
             if (!$value instanceof SqlFragment) {
                 $value = $this->quoteValue($value);
             }
-            $definition[] = 'DEFAULT ' . (string)$value;
+            $definition[] = 'DEFAULT ' . $value;
         }
 
         if (isset($this->auto) && $this->auto === true) {

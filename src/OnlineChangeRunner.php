@@ -80,7 +80,7 @@ class OnlineChangeRunner
         return $dsn;
     }
 
-    private function getProcess(...$args): Process
+    private function getProcess(array ...$args): Process
     {
         return ($this->processFactory)(...$args);
     }

@@ -94,9 +94,7 @@ class Alter extends Create implements OnlineChange
         $tableName = $this->tableIdentifier($this->table);
         $ddl = "ALTER TABLE {$tableName}\n";
 
-        $ddl .= $this->getCmds();
-
-        return $ddl;
+        return $ddl . $this->getCmds();
     }
 
     public function toOnlineAlter(): string
@@ -117,7 +115,7 @@ class Alter extends Create implements OnlineChange
         }
         // add columns
         foreach ($this->addColumns as $column) {
-            $cmds[] = 'ADD ' . (string)$column;
+            $cmds[] = 'ADD ' . $column;
         }
         // drop column defaults
         foreach ($this->dropDefaultColumns as $columnName) {
@@ -127,7 +125,7 @@ class Alter extends Create implements OnlineChange
         // change columns
         foreach ($this->changeColumns as $column) {
             $columnName = $this->quoteIdentifier($column->getName());
-            $cmds[] = 'CHANGE COLUMN ' . $columnName . ' ' . (string)$column;
+            $cmds[] = 'CHANGE COLUMN ' . $columnName . ' ' . $column;
         }
         // remove fields
         foreach ($this->removeColumns as $column) {
@@ -143,7 +141,7 @@ class Alter extends Create implements OnlineChange
         }
         // add indexes (key)
         foreach ($this->addIndexes as $index) {
-            $cmds[] = 'ADD ' . (string)$index;
+            $cmds[] = 'ADD ' . $index;
         }
         // remove indexes (key)
         foreach ($this->removeIndexes as $index) {
