@@ -14,17 +14,14 @@ use Phlib\SchemaChange\Table\Drop;
 
 class SchemaChange
 {
-    private Adapter $db;
+    private readonly Formatter $formatter;
 
-    private Formatter $formatter;
-
-    private ?OnlineChangeRunner $onlineChangeRunner;
-
-    public function __construct(Adapter $db, OnlineChangeRunner $onlineChangeRunner = null, Formatter $formatter = null)
-    {
-        $this->db = $db;
+    public function __construct(
+        private readonly Adapter $db,
+        private readonly ?OnlineChangeRunner $onlineChangeRunner = null,
+        Formatter $formatter = null,
+    ) {
         $this->formatter = $formatter ?? new DbFormatter($this->db);
-        $this->onlineChangeRunner = $onlineChangeRunner;
     }
 
     public function mapNames(NameMapper $nameMapper): void

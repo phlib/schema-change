@@ -8,8 +8,6 @@ class Index implements \Stringable
 {
     use FormatterTrait;
 
-    private string $tableName;
-
     private string $name;
 
     private array $columns;
@@ -18,11 +16,10 @@ class Index implements \Stringable
 
     public function __construct(
         Formatter $formatter,
-        string $tableName,
+        private readonly string $tableName,
         string ...$columns,
     ) {
         $this->formatter = $formatter;
-        $this->tableName = $tableName;
         $this->columns = $columns;
     }
 

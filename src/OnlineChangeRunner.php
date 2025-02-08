@@ -10,18 +10,15 @@ use Symfony\Component\Process\Process;
 
 class OnlineChangeRunner
 {
-    private string $binPath;
-
     /**
-     * @var \Closure {
-     *     @return Process
-     * }
+     * @var \Closure():Process
      */
-    private \Closure $processFactory;
+    private readonly \Closure $processFactory;
 
-    public function __construct(string $binPath, ?\Closure $processFactory = null)
-    {
-        $this->binPath = $binPath;
+    public function __construct(
+        private readonly string $binPath,
+        ?\Closure $processFactory = null,
+    ) {
         $this->processFactory = $processFactory ?? static function (...$args): Process {
             return new Process(...$args);
         };

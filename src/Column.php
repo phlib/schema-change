@@ -14,10 +14,6 @@ class Column implements \Stringable
 
     private const POSITION_AFTER = 'AFTER';
 
-    private string $name;
-
-    private string $type;
-
     private string $newName;
 
     private bool $unsigned;
@@ -34,11 +30,12 @@ class Column implements \Stringable
 
     private array $position;
 
-    public function __construct(Formatter $formatter, string $name, string $type)
-    {
+    public function __construct(
+        Formatter $formatter,
+        private readonly string $name,
+        private string $type,
+    ) {
         $this->formatter = $formatter;
-        $this->name = $name;
-        $this->type = $type;
     }
 
     public function getName(): string
