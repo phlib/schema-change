@@ -6,17 +6,13 @@ namespace Phlib\SchemaChange;
 
 use Phlib\Db\SqlFragment;
 
-class Column
+class Column implements \Stringable
 {
     use FormatterTrait;
 
     private const POSITION_FIRST = 'FIRST';
 
     private const POSITION_AFTER = 'AFTER';
-
-    private string $name;
-
-    private string $type;
 
     private string $newName;
 
@@ -28,20 +24,18 @@ class Column
 
     private bool $nullable = true;
 
-    /**
-     * @var string|SqlFragment
-     */
-    private $default;
+    private string|SqlFragment $default;
 
     private bool $auto;
 
     private array $position;
 
-    public function __construct(Formatter $formatter, string $name, string $type)
-    {
+    public function __construct(
+        Formatter $formatter,
+        private readonly string $name,
+        private string $type,
+    ) {
         $this->formatter = $formatter;
-        $this->name = $name;
-        $this->type = $type;
     }
 
     public function getName(): string
@@ -150,7 +144,7 @@ class Column
             if (!$value instanceof SqlFragment) {
                 $value = $this->quoteValue($value);
             }
-            $definition[] = 'DEFAULT ' . (string)$value;
+            $definition[] = 'DEFAULT ' . $value;
         }
 
         if (isset($this->auto) && $this->auto === true) {

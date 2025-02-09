@@ -12,15 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 class DbTest extends TestCase
 {
-    /**
-     * @var Adapter|MockObject
-     */
-    private $db;
+    private Adapter&MockObject $db;
 
-    /**
-     * @var Adapter\QuoteHandler|MockObject
-     */
-    private $quoter;
+    private Adapter\QuoteHandler&MockObject $quoter;
 
     protected function setUp(): void
     {

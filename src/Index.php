@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Phlib\SchemaChange;
 
-class Index
+class Index implements \Stringable
 {
     use FormatterTrait;
-
-    private string $tableName;
 
     private string $name;
 
@@ -18,11 +16,10 @@ class Index
 
     public function __construct(
         Formatter $formatter,
-        string $tableName,
-        string ...$columns
+        private readonly string $tableName,
+        string ...$columns,
     ) {
         $this->formatter = $formatter;
-        $this->tableName = $tableName;
         $this->columns = $columns;
     }
 
